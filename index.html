@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>River Water Quality Prediction Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>HYDROCLIMATIC RESEARCH GROUP (HRG)</h1>
+    <div class="container">
+        <div class="left-side">
+            <h2>RIVER WATER QUALITY PREDICTION TOOL</h2>
+            <p class="description">
+                Use this tool to predict the river water temperature and calculate saturated dissolved oxygen levels. Select the appropriate data and models to get started.
+            </p>
+        </div>
+        <div class="right-side">
+            <div class="tool-section">
+                <div class="left-container">
+                    <h3>RIVER WATER TEMPERATURE</h3>
+                    <form action="/predict" method="post" enctype="multipart/form-data">
+                        <label for="air_temp">Select Air Temperature Data:</label>
+                        <input type="file" id="air_temp" name="air_temp" accept=".csv" required><br>
+
+                        <label for="observed_temp">Select Observed Water Temperature Data:</label>
+                        <input type="file" id="observed_temp" name="observed_temp" accept=".csv" required><br>
+
+                        <label for="ml_model">Select ML Model:</label>
+                        <select id="ml_model" name="ml_model" required>
+                            <option value="linear_regression">Linear Regression</option>
+                            <option value="random_forest">Random Forest</option>
+                            <option value="decision_tree">Decision Tree</option>
+                            <option value="svm">Support Vector Machine (SVM)</option>
+                        </select><br>
+
+                        <label for="performance_metric">Select Performance Metric:</label>
+                        <select id="performance_metric" name="performance_metric" required>
+                            <option value="rmse">RMSE</option>
+                            <option value="mae">MAE</option>
+                            <option value="mse">MSE</option>
+                            <option value="r2_score">R2 Score</option>
+                            <option value="explained_variance">Explained Variance</option>
+                            <option value="max_error">Max Error</option>
+                        </select><br>
+
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+                <div class="right-container">
+                    <h4>SATURATED DISSOLVED OXYGEN</h4>
+                    <form action="/calculate_oxygen" method="post" enctype="multipart/form-data">
+                        <label for="oxygen_option">Select Option:</label>
+                        <select id="oxygen_option" name="oxygen_option" onchange="toggleOxygenOption()" required>
+                            <option value="select_data">Select Data</option>
+                            <option value="simulate_data">Simulate Data</option>
+                        </select><br>
+
+                        <div id="select_data_option">
+                            <label for="river_temp">Select River Temperature Data:</label>
+                            <input type="file" id="river_temp" name="river_temp" accept=".csv"><br>
+                        </div>
+
+                        <div id="simulate_data_option" style="display:none;">
+                            <p>The simulation will use the predicted water temperature data.</p>
+                        </div>
+
+                        <button type="submit">Calculate</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var fileInputs = document.querySelectorAll('input[type="file"]');
+            fileInputs.forEach(function(input) {
+                input.addEventListener('change', function() {
+                    var file = this.files[0];
+                    if (file) {
+                        var fileName = file.name;
+                        var fileExtension = fileName.split('.').pop();
+                        if (fileExtension !== 'csv') {
+                            alert('Please upload .csv files only');
+                            this.value = ''; // Clear the file input
+                        }
+                    }
+                });
+            });
+        });
+
+        function toggleOxygenOption() {
+            var option = document.getElementById("oxygen_option").value;
+            if (option === "select_data") {
+                document.getElementById("select_data_option").style.display = "block";
+                document.getElementById("simulate_data_option").style.display = "none";
+            } else {
+                document.getElementById("select_data_option").style.display = "none";
+                document.getElementById("simulate_data_option").style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

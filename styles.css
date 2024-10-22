@@ -1,0 +1,207 @@
+body {
+    background-image: url("images/background.jpg");
+    background-color: #cccccc;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #faf3f3;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 30px auto;
+    padding: 20px;
+    max-width: 1000px; /* Adjust the width as needed */
+    position: relative;
+}
+
+.left-side {
+    width: 45%; /* Adjust width as needed */
+    padding-right: 20px;
+}
+
+.right-side {
+    width: 50%; /* Adjust width as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+h1 {
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2.5em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    margin-top: 100px;
+    margin-bottom: 10px;
+    text-align: center; /* Center h1 */
+}
+
+
+.description {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.6em;
+    line-height: 1.5;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.tool-section {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+
+/* Left Container */
+.left-container {
+    width: 70%; /* Smaller initial size */
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease-in-out, 
+                box-shadow 0.4s ease-in-out, 
+                background-color 0.4s ease-in-out;
+    margin: 5px;
+    cursor: pointer;
+    transform-origin: center;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+}
+
+.left-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    background-color: rgba(61, 93, 101, 0.4);
+}
+
+/* Right Container */
+.right-container {
+    width: 60%; /* Smaller initial size */
+    height: fit-content;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease-in-out, 
+                box-shadow 0.4s ease-in-out, 
+                background-color 0.4s ease-in-out;
+    margin: 5px;
+    cursor: pointer;
+    transform-origin: center;
+    position: relative;
+    z-index: 1;
+    margin-top: 80px;
+    margin-left: 40px;
+    align-items: center;
+}
+
+.right-container:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+    background-color: rgba(61, 93, 101, 0.4);
+}
+
+h2 {
+    font-weight: 800;
+}
+
+h3,
+h4 {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: normal;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    background: rgba(18, 64, 80, 0.6);
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: large; /* Adjust font size as needed */
+    color: #a9dada;
+}
+
+form {
+    color: #fdfdfd;
+    margin-top: 20px;
+}
+
+label {
+    font-family: 'Courier New', Courier, monospace;
+    display: block;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+input[type="file"],
+select,
+button {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    color: #fff;
+}
+
+button {
+    background-color: #6f7072;
+    color: #fff;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #b0b5bb;
+}
+
+input[type="file"]::file-selector-button,
+select,
+button {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover,
+select:hover,
+button:hover {
+    background: rgba(255, 255, 255, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+select {
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+}
+
+select:hover {
+    background: rgba(0, 0, 0, 0.8); /* Darker semi-transparent black background on hover */
+}
+
+.alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffcccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.alert p {
+    margin: 0;
+    font-size: 16px;
+    color: #ff0000;
+}

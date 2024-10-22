@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Results - River Water Quality Prediction Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style1.css') }}">
+</head>
+<body>
+    <div class="results-container">
+        <div class="top-right-buttons">
+            <a href="/" class="go-back">Go Back</a>
+            <a href="{{ url_for('download_file', filename='prediction_results.csv') }}" class="download-button">Download Results</a>
+            <a href="{{ url_for('generate_graphs') }}" class="graph-button">Generate Graphs</a>
+        </div>
+        <h1>Results</h1>
+        
+        {% if performance is not none %}
+            <h2>Performance Metric: {{ performance_metric.upper() }}</h2>
+            <p>Value: {{ performance }}</p>
+        {% endif %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Prediction</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prediction in predictions %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ prediction }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const h1 = document.querySelector('h1');
+        let isDragging = false;
+
+        h1.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            const offsetX = e.clientX - h1.getBoundingClientRect().left;
+            const offsetY = e.clientY - h1.getBoundingClientRect().top;
+
+            const onMouseMove = (e) => {
+                if (isDragging) {
+                    h1.style.position = 'absolute';
+                    h1.style.left = `${e.clientX - offsetX}px`;
+                    h1.style.top = `${e.clientY - offsetY}px`;
+                }
+            };
+
+            const onMouseUp = () => {
+                isDragging = false;
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+            };
+
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+        });
+    });
+    </script>
+</body>
+</html>
